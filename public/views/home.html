@@ -1,0 +1,17 @@
+<div class="jumbotron text-center">
+  <h1> Pad DIY</h1>
+
+  <p>{{ tagline }}</p>
+
+<div id="pad" class="col-md-8">
+  <h3>Drum Pad</h3>
+  <button class="padItem col-md-4" ng-repeat="sample in samples"> {{ sample.name }} </button>
+</div>
+
+<div id="sample_upload">
+  <h3>Upload sample</h3>
+  <button ng-click="requestMic()" class="btn btn-primary"> Request Mic</button>
+
+</div>
+
+</div>
