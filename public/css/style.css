@@ -6,3 +6,9 @@
   background-color: blue;
   border-style: solid;
 }
+
+#synth{
+  margin: auto;
+  padding: auto;
+  text-align: center;
+}
