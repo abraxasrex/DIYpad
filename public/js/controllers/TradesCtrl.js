@@ -1,5 +1,5 @@
 angular.module('TradesCtrl', []).controller('TradesController', function($scope) {
 
-    $scope.tagline = 'Nothing beats a pocket protector!';
+  $scope.tagline = 'This is a third controller\'s tagline!';
 
 });
