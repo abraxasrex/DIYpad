@@ -31,7 +31,6 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
   var oscillator;
   var connected;
   var currentOscs = [];
-
   //tone library provided by johnny reis (https://github.com/jjjreisss)
   var Tones = {
     "A#3": 466.16,
@@ -64,17 +63,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
   }());
 
 
-  $scope.startSound = function(){
-    if(!oscillator){
-      oscillator = audioCtx.createOscillator();
-      oscillator.type = 'square';
-      oscillator.frequency.value = 3000;
-      oscillator.start(0);
-      oscillator.connect( audioCtx.destination);
-      console.log('started sound, osc: ', oscillator);
-    }
-  };
-  $scope.stopSound = function(){
+
+  $scope.stopScale = function(){
     if(!!oscillator){
       oscillator.disconnect();
       oscillator.stop();
@@ -82,7 +72,45 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
       console.log('stopped sound');
     }
   };
-  $scope.playC5 = function(){
+
+  $scope.oscType = 'square';
+  $scope.startingFreq = 466.16;
+  $scope.freqSpacing = 27;
+  $scope.scaleLength = 12;
+  $scope.noteLength = 500;
+
+$scope.startScale = function(){
+    if(!oscillator){
+      oscillator = audioCtx.createOscillator();
+      oscillator.type = $scope.oscType;
+      oscillator.frequency.value = $scope.startingFreq;
+      oscillator.start(0);
+      oscillator.connect( audioCtx.destination);
+      console.log('started sound, osc: ', oscillator);
+
+      var i = 0;
+      setInterval( function(){
+        if(i <= $scope.scaleLength){
+
+          $scope.stopScale();
+          oscillator = audioCtx.createOscillator();
+          oscillator.type = $scope.oscType;
+          var max = ($scope.freqSpacing * $scope.scaleLength) + $scope.startingFreq;
+          var min = $scope.startingFreq;
+          oscillator.frequency.value = Math.random() * (max - min) + min;
+          console.log('frequency: ', oscillator.frequency.value);
+          oscillator.start(0);
+          oscillator.connect( audioCtx.destination);
+            i += 1;
+        }else{
+          $scope.stopScale();
+          clearInterval();
+        }
+      }, $scope.noteLength);
+    }
+  }
+
+  /*$scope.playC5 = function(){
     if(!!oscillator){
       oscillator.frequency.value = 1046.50;
     }
@@ -92,7 +120,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope) {
     if(!!oscillator){
       oscillator.frequency.value = 1174.66;
     }
-  };
+  }; */
   ////end of web audio code
 
 });

@@ -14,11 +14,28 @@
 </div>
 
 <div id="synth" class="col-md-12">
-  <button id="start-sound" class="btn btn-primary" ng-click="startSound()">Start Sound</button>
-  <button id="C5" class="btn btn-primary" ng-click="playC5()">C5</button>
-    <button id="D5" class="btn btn-primary" ng-click="playD5()">D5</button>
+  <br />
+  <button id="start-sound" class="btn btn-primary" ng-click="startScale()">Start Sound</button>
+  <button id="play1" class="btn btn-success" ng-click="playCurrentFreq()">Play Current Frequency</button>
+   <form>
+  <label for="input1">Oscillator shape: </label>
+  <input name="input1" id="input1" type="text" value={{oscType}}>
+
+  <label for="input1">Starting frequency: </label>
+  <input name="input1" id="input1" type="number" value={{startingFreq}}>
+
+  <label for="input1">Frequency Spacing: </label>
+  <input name="input1" id="input1" type="number" value={{freqSpacing}}>
+
+  <label for="input1">Scale length: </label>
+  <input name="input1" id="input1" type="number" value={{scaleLength}}>
+
+  <label for="input1">Note Length: </label>
+  <input name="input1" id="input1" type="number" value={{noteLength}}>
     <!--<button id="test-keycode"></button>-->
-<button id="stop-sound" class="btn btn-primary" ng-click="stopSound()">Stop Wave</button>
+  </form>
+  <br />
+<button id="stop-sound" class="btn btn-primary" ng-click="stopScale()">Stop Wave</button>
 </div>
 
 </div>
